@@ -1,13 +1,11 @@
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN"
-"http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html>
 <html>
     <head>
-        <title>Poster Circle</title>
+        <title>CSS 3D Slot machine</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="initial-scale=0.60, minimum-scale=0.60, maximum-scale=0.60">
         <style type="text/css">
-
             body {
                 font-family: 'Roboto Condensed', sans-serif;
                 font-size: 12px;
@@ -15,26 +13,14 @@
 
             #stage {
                 margin: 150px;
-                height: 400px;
                 -webkit-perspective: 800;
                 display: inline-block;
-                /*
-                Setting the perspective of the contents of the stage
-                but not the stage itself
-                */
-            }
-
-            #rotate {
-                margin: 0 auto;
-                height: 400px;
-                -webkit-transform-style: preserve-3d;
-                float: left;
                 /* Ensure that we're in 3D space */
                 -webkit-transform-style: preserve-3d;
-                padding-top: 100px;
             }
 
             .ring {
+                float: left;
                 margin: 0 auto;
                 height: 100px;
                 width: 100px;
@@ -45,14 +31,14 @@
             }
 
             .ring > :nth-child(odd) {
-                background-color: rgb(68, 93, 113);
+                background-color: #445d71;
             }
 
             .ring > :nth-child(even) {
                 background-color: #406983;
             }
 
-            .poster {
+            .face {
                 position: absolute;
                 width: 100px;
                 height: 100px;
@@ -62,7 +48,7 @@
                 -webkit-backface-visibility: hidden;
             }
 
-            .poster > p {
+            .face > p {
                 font-family: 'Roboto Condensed', sans-serif;
                 font-size: 36px;
                 font-weight: bold;
@@ -70,54 +56,36 @@
                 margin-top: 28px;
             }
 
-            /*
-            Set up each row to have a different animation duration
-            and alternating y-axis rotation directions.
-            */
-            /*.ring {
-            -webkit-animation-name: x-spin;
-            -webkit-animation-duration: 2s;
-            }*/
-
-
-            @-webkit-keyframes x-spin {
-                0%    { -webkit-transform: rotateX(0deg); }
-                100%  { -webkit-transform: rotateX(360deg); }
-            }
-
             .numberInput{
                 /*display: none;*/
             }
-
 
         </style>
 
         <script type="text/javascript">
 
-            const POSTERS_PER_ROW = 12;
-            const RING_RADIUS = 200;
-            var posterAngle;;
+            var FACES_PER_RING = 12;
+            var RING_RADIUS = 200;
+            var FACE_ANGLE = 360 / FACES_PER_RING;
 
-            function setup_posters (row)
+            function setup_faces (row)
             {
-                posterAngle = 360 / POSTERS_PER_ROW;
-                for (var i = 0; i < POSTERS_PER_ROW; i ++) {
-                    var poster = document.createElement('div');
-                    poster.className = 'poster';
-                    // compute and assign the transform for this poster
+                for (var i = 0; i < FACES_PER_RING; i ++) {
+                    var face = document.createElement('div');
+                    face.className = 'face';
+                    // compute and assign the transform for this face
                     var transform = 'rotateX(' + getDefaultRotation(i) + 'deg) translateZ(' + RING_RADIUS + 'px)';
-                    poster.style.webkitTransform = transform;
-                    // setup the number to show inside the poster
-                    var content = poster.appendChild(document.createElement('p'));
+                    face.style.webkitTransform = transform;
+                    // setup the number to show inside the face
+                    var content = face.appendChild(document.createElement('p'));
                     content.textContent = i;
-                    // add the poster to the row
-                    row.appendChild(poster);
+                    // add the face to the row
+                    row.appendChild(face);
                 }
-
             }
 
             function getDefaultRotation(index) {
-                return posterAngle * index;
+                return FACE_ANGLE * index;
             }
 
             var styleElement;
@@ -137,7 +105,6 @@
                 }
             }
 
-            var ring1, ring2, ring3;
             var timeRun = 0;
             var defaultAnimationStuff = '-webkit-animation-duration: 5s; -webkit-animation-iteration-count: 1; -webkit-animation-fill-mode: forwards; -webkit-animation-timing-function: ease-in-out;';
 
@@ -145,13 +112,9 @@
 
             function init ()
             {
-                ring1 = document.getElementById('ring-1');
-                ring2 = document.getElementById('ring-2');
-                ring3 = document.getElementById('ring-3');
-
-                setup_posters(ring1);
-                setup_posters(ring2);
-                setup_posters(ring3);
+                setup_faces(document.getElementById('ring-1'));
+                setup_faces(document.getElementById('ring-2'));
+                setup_faces(document.getElementById('ring-3'));
 
                 document.querySelector('.startSpinn').addEventListener('click', function(){
                     var cssStr = [];
@@ -194,15 +157,9 @@
 
     <body>
         <div id="stage">
-            <div id="rotate">
-                <div id="ring-1" class="ring"></div>
-            </div>
-            <div id="rotate">
-                <div id="ring-2" class="ring"></div>
-            </div>
-            <div id="rotate">
-                <div id="ring-3" class="ring"></div>
-            </div>
+            <div id="ring-1" class="ring"></div>
+            <div id="ring-2" class="ring"></div>
+            <div id="ring-3" class="ring"></div>
         </div>
 
         <div>
