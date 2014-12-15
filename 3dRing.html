@@ -174,10 +174,12 @@
                 updateDynamicCss(cssStr.join(''));
               
               i=4;
-              while(--i){                
-                  var ring = document.getElementById('ring-' + i);
-                  
-                  ring.setAttribute('style', '-webkit-animation-name: ringAnimation' + i + '' + timeRun +';' + defaultAnimationStuff);                  
+              while(--i){                  
+                  window.setTimeout(function(i, timeRun){ 
+                      return function() {
+                          document.getElementById('ring-' + i).setAttribute('style', '-webkit-animation-name: ringAnimation' + i + '' + timeRun +';' + defaultAnimationStuff); 
+                    }
+                  }(i, timeRun), 50 + (250 * (i - 1)));
               }
               
               timeRun++;
