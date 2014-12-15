@@ -9,7 +9,7 @@
         <style type="text/css">
 
             body {
-                font-family: 'Lucida Grande', Verdana, Arial;
+                font-family: 'Roboto Condensed', sans-serif;
                 font-size: 12px;
             }
 
@@ -45,24 +45,25 @@
             }
 
             .ring > :nth-child(odd) {
-                background-color: #995C7F;
+                background-color: rgb(68, 93, 113);
             }
 
             .ring > :nth-child(even) {
-                background-color: #835A99;
+                background-color: #406983;
             }
 
             .poster {
                 position: absolute;
                 width: 100px;
                 height: 100px;
-                opacity: 0.7;
-                color: rgba(0,0,0,0.9);
+                /*opacity: 0.7;*/
+                color: #ffffff; /*rgba(0,0,0,0.9);*/
                 -webkit-border-radius: 10px;
+                -webkit-backface-visibility: hidden;
             }
 
             .poster > p {
-                font-family: 'Georgia', serif;
+                font-family: 'Roboto Condensed', sans-serif;
                 font-size: 36px;
                 font-weight: bold;
                 text-align: center;
@@ -189,7 +190,7 @@
                             return function() {
                                 document.getElementById('ring-' + i).setAttribute('style', '-webkit-animation-name: ringAnimation' + i + '' + timeRun +';' + defaultAnimationStuff); 
                             }
-                        }(i, timeRun), 50 + (250 * (i - 1)));
+                        }(i, timeRun), 50 + (Math.random() * 750));
                     }
 
                     timeRun++;
@@ -207,17 +208,22 @@
         <div id="stage">
             <div id="rotate">
                 <div id="ring-1" class="ring"></div>
-                <input type="number" id="input1" class="numberInput">
             </div>
             <div id="rotate">
                 <div id="ring-2" class="ring"></div>
-                <input type="number" id="input2" class="numberInput">
             </div>
             <div id="rotate">
                 <div id="ring-3" class="ring"></div>
-                <input type="number" id="input3" class="numberInput">
             </div>
         </div>
+        
+        <div>
+                <input type="number" id="input1" class="numberInput">        
+                <input type="number" id="input2" class="numberInput">
+                <input type="number" id="input3" class="numberInput">
+        </div>
+        
+        
 
         <input type="button" class="startSpinn" value="Start">
 
