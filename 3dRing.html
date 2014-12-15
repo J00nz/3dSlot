@@ -84,9 +84,9 @@
                 0%    { -webkit-transform: rotateX(0deg); }
                 100%  { -webkit-transform: rotateX(360deg); }
             }
-            
+
             .numberInput{
-                display: none;
+                /*display: none;*/
             }
 
 
@@ -116,16 +116,13 @@
 
             }
 
-            function getDefaultRotation(index){
+            function getDefaultRotation(index) {
                 return posterAngle * index;
             }
 
             var styleElement;
-
-
             function updateDynamicCss(css){
-
-                if(!styleElement){                
+                if (!styleElement){                
                     var head = document.head || document.getElementsByTagName('head')[0],
                         styleElement = document.createElement('style');
 
@@ -141,11 +138,9 @@
             }
 
             var ring1, ring2, ring3;
-
             var timeRun = 0;
-
             var defaultAnimationStuff = '-webkit-animation-duration: 5s; -webkit-animation-iteration-count: 1; -webkit-animation-fill-mode: forwards; -webkit-animation-timing-function: ease-in-out;';
-            
+
             var currentState = [0,0,0];
 
             function init ()
@@ -157,16 +152,12 @@
                 setup_posters(ring1);
                 setup_posters(ring2);
                 setup_posters(ring3);
-                            
 
                 document.querySelector('.startSpinn').addEventListener('click', function(){
-                    document.body.appendChild
-
                     var cssStr = [];
 
-                    i=4;
-                    while(--i){
-
+                    var i = 4;
+                    while(--i) {
                         var input = document.getElementById('input'+i);
 
                         var num = Number(input.value) || 0;
@@ -177,14 +168,13 @@
 
                         var ring = document.getElementById('ring-' + i);                  
                         ring.setAttribute('style', '-webkit-transform: rotateX(' + currentState[i] + 'deg);'); 
-                        
-                         currentState[i] = nextState;
-                    }
 
+                        currentState[i] = nextState;
+                    }
 
                     updateDynamicCss(cssStr.join(''));
 
-                    i=4;
+                    i = 4;
                     while(--i){                  
                         window.setTimeout(function(i, timeRun){ 
                             return function() {
@@ -216,17 +206,14 @@
                 <div id="ring-3" class="ring"></div>
             </div>
         </div>
-        
+
         <div>
-                <input type="number" id="input1" class="numberInput">        
-                <input type="number" id="input2" class="numberInput">
-                <input type="number" id="input3" class="numberInput">
+            <input type="number" id="input1" class="numberInput">        
+            <input type="number" id="input2" class="numberInput">
+            <input type="number" id="input3" class="numberInput">
         </div>
-        
-        
 
         <input type="button" class="startSpinn" value="Start">
-
     </body>
 
 </html>
