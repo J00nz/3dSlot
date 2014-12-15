@@ -31,11 +31,12 @@
                 float: left;
                 /* Ensure that we're in 3D space */
                 -webkit-transform-style: preserve-3d;
+                padding-top: 100px;
             }
 
             .ring {
                 margin: 0 auto;
-                height: 110px;
+                height: 100px;
                 width: 100px;
                 -webkit-transform-style: preserve-3d;
                 -webkit-animation-iteration-count: infinite;
@@ -81,6 +82,10 @@
             @-webkit-keyframes x-spin {
                 0%    { -webkit-transform: rotateX(0deg); }
                 100%  { -webkit-transform: rotateX(360deg); }
+            }
+            
+            .numberInput{
+                display: none;
             }
 
 
@@ -197,15 +202,15 @@
         <div id="stage">
             <div id="rotate">
                 <div id="ring-1" class="ring"></div>
-                <input type="number" id="input1">
+                <input type="number" id="input1" class="numberInput">
             </div>
             <div id="rotate">
                 <div id="ring-2" class="ring"></div>
-                <input type="number" id="input2">
+                <input type="number" id="input2" class="numberInput">
             </div>
             <div id="rotate">
                 <div id="ring-3" class="ring"></div>
-                <input type="number" id="input3">
+                <input type="number" id="input3" class="numberInput">
             </div>
         </div>
 
